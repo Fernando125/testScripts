@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Directorio donde se encuentran los archivos
-directorio="."
+directorio="ruta_del_directorio"
 
 # Encuentra y elimina archivos con más de 7 días de antigüedad
 find "$directorio" -type f -mtime +7 -exec rm {} \;
