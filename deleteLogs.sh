@@ -1,16 +1,17 @@
 #!/bin/bash
 
-# Directorio donde se encuentran los archivos
-directorio="ruta_directorio"
-fecha=$(date +'%d%m%Y')
+# Directory where we can see the logs
+directory="path_directory"
+# Variable to keep the date of the day in the format "01012024"
+dateLogs=$(date +'%d%m%Y')
 
-# Encuentra y elimina los logs con mas de 7 dias
-find "$directorio" -type f -mtime +7 -exec rm {} \;
+# Find and delete log older than 7 days
+find "$directory" -type f -mtime +7 -exec rm {} \;
 
-# Encuentra los ficheros "*.log" con menos de 7 dias y los comprime en .zip
-find "$directorio" -type f -name "*.log" -ctime -7 -exec zip -q logs_$fecha.zip *.log \;
+# Finds "*.log" files less than 7 days old and compresses them into .zip
+find "$directory" -type f -name "*.log" -ctime -7 -exec zip -q logs_$dateLogs.zip *.log \;
 
-# Se eliminan los logs que han sido comprimidos para que no haya informacion duplicada
-find "$directorio" -type f -name "*.log" -ctime -7 -exec rm {} \;
+# Logs that have been compressed are eliminated so that there is no duplicate information
+find "$directory" -type f -name "*.log" -ctime -7 -exec rm {} \;
 
-echo "Se han comprimido los logs con menos de 7 días y se han eliminado los logs con mas de 7 dias"
+echo "Logs files less than 7 days have been compressed and logs files older than 7 days have been deleted"
