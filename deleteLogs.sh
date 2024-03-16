@@ -26,13 +26,13 @@ rename_logs() {
 # Find and delete log older than 7 days
 find "$directory" -type f -mtime +7 -exec rm {} \;
 
-# Find all log fields older than 7 days, duplicate and rename them
+# Find all log files older than 7 days, duplicate and rename them
 rename_logs
 
-#Zip new files
+#Zip only duplicated files
 find "$directory" -type f -name "*-1*" -exec zip -q logs_$dateLogs.zip {} +
 
-#Delete duplicated files
+#Delete duplicated files with "-1" string
 find "$directory" -type f -name "*-1*" -exec rm {} \;
 
 echo "Logs files less than 7 days have been compressed and logs files older than 7 days have been deleted"
