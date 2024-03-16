@@ -2,7 +2,7 @@
 
 # Directory where we can see the logs
 directory="/home/fernando/pruebas"
-# Variable to keep the date of the day in the format "01012024"
+# Variable to keep the date of the day in the format "01012000"
 dateLogs=$(date +'%d%m%Y')
 
 rename_logs() {
@@ -14,6 +14,12 @@ rename_logs() {
 
         # New renamed filename
         new_filename="${filename_noext}-1.log"
+
+        # Verificar si el archivo ya ha sido renombrado
+        if [ "$filename" != "$new_filename" ]; then
+            # Renombrar el archivo utilizando cp
+            cp "$file" "$directory/$new_filename"
+        fi
     done
 }
 
@@ -24,10 +30,10 @@ find "$directory" -type f -mtime +7 -exec rm {} \;
 
 rename_logs
 
-# Finds "*.log" files less than 7 days old and compresses them into .zip
-find "$directory" -type f -name "*.log" -ctime -7 -exec zip -q logs_$dateLogs.zip *.log \;
+#Zip new files
+find "$directory" -type f -name "*-1*" -exec zip -q logs_$dateLogs.zip {} +
 
-# Logs that have been compressed are eliminated so that there is no duplicate information
-find "$directory" -type f -name "*.log" -ctime -7 -exec rm {} \;
+#Delete duplicated files
+find "$directory" -type f -name "*-1*" -exec rm {} \;
 
 echo "Logs files less than 7 days have been compressed and logs files older than 7 days have been deleted"
