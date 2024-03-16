@@ -15,9 +15,9 @@ rename_logs() {
         # New renamed filename
         new_filename="${filename_noext}-1.log"
 
-        # Verificar si el archivo ya ha sido renombrado
+        # Verify if file has been renamed
         if [ "$filename" != "$new_filename" ]; then
-            # Renombrar el archivo utilizando cp
+            # Rename files with cp command
             cp "$file" "$directory/$new_filename"
         fi
     done
