@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Directory where we can see the logs
-directory="/home/fernando/pruebas"
+directory="/var/log/journal"
 # Variable to keep the date of the day in the format "01012000"
 dateLogs=$(date +'%d%m%Y')
 
