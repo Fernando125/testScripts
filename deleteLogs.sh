@@ -27,7 +27,6 @@ rename_logs() {
 find "$directory" -type f -mtime +7 -exec rm {} \;
 
 # Find all log fields older than 7 days, duplicate and rename them
-
 rename_logs
 
 #Zip new files
