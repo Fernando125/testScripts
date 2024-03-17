@@ -30,7 +30,7 @@ find "$directory" -type f -mtime +7 -exec rm {} \;
 rename_logs
 
 #Zip only duplicated files
-cd "$directory" && find . -type f -name "*-1*" -exec zip -q logs_$dateLogs.zip {} +
+find "$directory" -type f -name "*-1*" -exec zip -q logs_$dateLogs.zip {} +
 
 #Delete duplicated files with "-1" string
 find "$directory" -type f -name "*-1*" -exec rm {} \;
